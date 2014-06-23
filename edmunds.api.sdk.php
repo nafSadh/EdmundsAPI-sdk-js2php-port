@@ -2,7 +2,8 @@
   class EdmundsAPI{
     /* consts */
     const ver = '0.1.7';
-    const seedUrl = 'api.edmunds.com';
+    const baseName = 'api.edmunds.com';
+    const mediaName = 'media.ed.edmunds-media.com';
 
     /* properties */
 
@@ -12,16 +13,19 @@
     private bool htsecure = true;
     private string rFormat = 'json';
     private string baseUrl = '';
+    private string mediaUrl = '';
 
     /* functions */
 
     public function setSecureProtocol(){
       this->htsecure = true;
-      this->baseUrl = "https://"+seedUrl;
+      this->baseUrl = "https://"+baseName;
+      this->mediaUrl = "https://"+mediaName;
     }
     public function setSecureProtocol(){
       this->htsecure = false;
-      this->baseUrl = "http://"+seedUrl;
+      this->baseUrl = "https://"+baseName;
+      this->baseUrl = "https://"+mediaName;
     }
 
     public function setFormatJSON(){
