@@ -16,37 +16,45 @@
     private $mediaUrl = '';
 
     /* functions */
-    public function __construct($apikey){
+    public function __construct($apikey)
+    {
       $this->key = $apikey;
       $this->setSecureProtocol();
       $this->setFormatJSON();
     }
 
-    public function setSecureProtocol(){
+    public function setSecureProtocol()
+    {
       $this->htsecure = true;
       $this->baseUrl = "https://".EdmundsAPI::baseName;
       $this->mediaUrl = "https://".EdmundsAPI::mediaName;
     }
-    public function unsetSecureProtocol(){
+    public function unsetSecureProtocol()
+    {
       $this->htsecure = false;
       $this->baseUrl = "https://".EdmundsAPI::baseName;
       $this->baseUrl = "https://".EdmundsAPI::mediaName;
     }
 
-    public function setFormatJSON(){
+    public function setFormatJSON()
+    {
       $this->rFormat = 'json';
     }
-    public function setFormatXML(){
+    public function setFormatXML()
+    {
       $this->rFormat = 'xml';
     }
 
 
-    public function call($endpoint, $param){
+    public function call($endpoint, $param)
+    {
       $uri = $this->baseUrl."/".$endpoint
         ."?fmt=".$this->rFormat
         ."&api_key=".$this->key
         .$param;
-        echo $uri;
+
+      echo $uri;
+
       return file_get_contents($uri);
     }
 
