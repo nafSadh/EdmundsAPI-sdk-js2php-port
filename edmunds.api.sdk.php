@@ -9,30 +9,45 @@
 
 
     /* fields */
-    private string key = '';
-    private bool htsecure = true;
-    private string rFormat = 'json';
-    private string baseUrl = '';
-    private string mediaUrl = '';
+    private $key = '';
+    private $htsecure = true;
+    private $rFormat = 'json';
+    private $baseUrl = '';
+    private $mediaUrl = '';
 
     /* functions */
+    public function __construct($apikey){
+      $this->key = $apikey;
+      $this->setSecureProtocol();
+      $this->setFormatJSON();
+    }
 
     public function setSecureProtocol(){
-      this->htsecure = true;
-      this->baseUrl = "https://"+baseName;
-      this->mediaUrl = "https://"+mediaName;
+      $this->htsecure = true;
+      $this->baseUrl = "https://".EdmundsAPI::baseName;
+      $this->mediaUrl = "https://".EdmundsAPI::mediaName;
     }
-    public function setSecureProtocol(){
-      this->htsecure = false;
-      this->baseUrl = "https://"+baseName;
-      this->baseUrl = "https://"+mediaName;
+    public function unsetSecureProtocol(){
+      $this->htsecure = false;
+      $this->baseUrl = "https://".EdmundsAPI::baseName;
+      $this->baseUrl = "https://".EdmundsAPI::mediaName;
     }
 
     public function setFormatJSON(){
-      this->rFormat = 'json';
+      $this->rFormat = 'json';
     }
     public function setFormatXML(){
-      this->rFormat = 'xml';
+      $this->rFormat = 'xml';
+    }
+
+
+    public function call($endpoint, $param){
+      $uri = $this->baseUrl."/".$endpoint
+        ."?fmt=".$this->rFormat
+        ."&api_key=".$this->key
+        .$param;
+        echo $uri;
+      return file_get_contents($uri);
     }
 
   }
